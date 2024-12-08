@@ -1,0 +1,175 @@
+body {
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f5f5f5;
+    color: #333;
+  }
+
+  a {
+    text-decoration: none;
+    color: inherit;
+  }
+
+  h2 {
+    color: #4CAF50;
+    font-weight: bold;
+  }
+
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+
+  /* Sidebar Menu */
+  .responsive-nav {
+    position: fixed;
+    width: 250px;
+    height: 100vh;
+    background-color: #343a40;
+    color: #fff;
+    padding: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+
+  .responsive-nav .image img {
+    width: 80%;
+    border-radius: 50%;
+    margin-bottom: 15px;
+    border: 3px solid #4CAF50;
+  }
+
+  .responsive-nav .author-content h4 {
+    font-size: 20px;
+    font-weight: 700;
+    color: #fff;
+    margin-top: 10px;
+  }
+
+  .responsive-nav .author-content span {
+    font-size: 14px;
+    font-style: italic;
+    color: #ccc;
+  }
+
+  .responsive-nav .main-menu {
+    margin-top: 20px;
+  }
+
+  .responsive-nav .main-menu li {
+    margin: 10px 0;
+  }
+
+  .responsive-nav .main-menu a {
+    color: #fff;
+    font-size: 16px;
+    transition: color 0.3s ease;
+  }
+
+  .responsive-nav .main-menu a:hover {
+    color: #4CAF50;
+  }
+
+  .social-network ul {
+    display: flex;
+    gap: 15px;
+    margin-top: 20px;
+  }
+
+  .social-network ul a {
+    font-size: 20px;
+    color: #fff;
+    transition: transform 0.3s ease, color 0.3s ease;
+  }
+
+  .social-network ul a:hover {
+    color: #4CAF50;
+    transform: scale(1.2);
+  }
+
+  /* Section Academic */
+  .about-me {
+    margin-left: 270px;
+    padding: 40px;
+  }
+
+  .section-heading {
+    text-align: center;
+    margin-bottom: 30px;
+  }
+
+  .line-dec {
+    width: 50px;
+    height: 3px;
+    background-color: #4CAF50;
+    margin: 10px auto;
+  }
+
+  .myDiv,
+  .myDiv1 {
+    background: #fff;
+    padding: 20px;
+    margin-bottom: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .myDiv h2,
+  .myDiv1 h2 {
+    color: #4CAF50;
+    font-size: 1.8rem;
+    margin-bottom: 15px;
+  }
+
+  .myDiv ul,
+  .myDiv1 ul {
+    list-style-type: none;
+    padding: 0;
+  }
+
+  .myDiv ul li,
+  .myDiv1 ul li {
+    font-size: 1rem;
+    margin-bottom: 8px;
+    color: #555;
+  }
+
+  .les_images img {
+    width: 200px;
+    height: auto;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+  }
+
+  .les_images img:hover {
+    transform: scale(1.05);
+  }
+
+  /* Responsive Adjustments */
+  @media (max-width: 768px) {
+    .responsive-nav {
+      width: 100%;
+      height: auto;
+      position: relative;
+    }
+
+    .about-me {
+      margin-left: 0;
+      padding: 20px;
+    }
+
+    .myDiv,
+    .myDiv1 {
+      flex-direction: column;
+      text-align: center;
+    }
+
+    .les_images img {
+      margin: 15px 0;
+    }
+  }

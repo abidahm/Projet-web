@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Football Quiz</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Roboto', sans-serif;
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(to bottom, #008000, #004d00);
+      color: #fff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
+
+    .quiz-container {
+      background: #fff;
+      border-radius: 10px;
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+      padding: 20px;
+      max-width: 600px;
+      width: 90%;
+      color: #333;
+    }
+
+    .quiz-header {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .quiz-header h1 {
+      font-size: 1.8rem;
+      color: #008000;
+    }
+
+    .quiz-header p {
+      color: #666;
+    }
+
+    .question {
+      margin: 20px 0;
+      font-size: 1.2rem;
+      color: #333;
+    }
+
+    .options {
+      list-style-type: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .options li {
+      margin-bottom: 10px;
+    }
+
+    .options input[type="radio"] {
+      display: none;
+    }
+
+    .options label {
+      display: block;
+      background: #f5f5f5;
+      padding: 10px 15px;
+      border-radius: 5px;
+      transition: background-color 0.3s ease, transform 0.2s ease;
+      cursor: pointer;
+      border: 1px solid #ddd;
+    }
+
+    .options input[type="radio"]:checked + label {
+      background: #008000;
+      color: #fff;
+      border-color: #008000;
+    }
+
+    .options label:hover {
+      background: #e0e0e0;
+      transform: scale(1.02);
+    }
+
+    .btn {
+      display: inline-block;
+      background: #008000;
+      color: #fff;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 1rem;
+      transition: background-color 0.3s ease, transform 0.2s ease;
+      margin-top: 20px;
+    }
+
+    .btn:hover {
+      background: #004d00;
+      transform: scale(1.05);
+    }
+
+    .result {
+      text-align: center;
+      margin-top: 20px;
+    }
+
+    .result h2 {
+      color: #008000;
+    }
+  </style>
+</head>
+<body>
+  <div class="quiz-container">
+    <div class="quiz-header">
+      <h1>Football Quiz</h1>
+      <p>Test your knowledge of the beautiful game!</p>
+    </div>
+    <div id="quiz">
+      <!-- Quiz questions will be dynamically inserted here -->
+    </div>
+    <button id="submit" class="btn">Submit</button>
+    <div class="result" id="result"></div>
+  </div>
+
+  <script>
+    const quizData = [
+      {
+        question: "Which country won the FIFA World Cup in 2018?",
+        a: "Brazil",
+        b: "France",
+        c: "Germany",
+        d: "Argentina",
+        correct: "b",
+      },
+      {
+        question: "Who is the top scorer in football history?",
+        a: "Cristiano Ronaldo",
+        b: "Pele",
+        c: "Lionel Messi",
+        d: "Diego Maradona",
+        correct: "a",
+      },
+      {
+        question: "Which club has won the most UEFA Champions League titles?",
+        a: "AC Milan",
+        b: "Real Madrid",
+        c: "Barcelona",
+        d: "Manchester United",
+        correct: "b",
+      },
+      {
+        question: "In what year was the first FIFA World Cup held?",
+        a: "1928",
+        b: "1930",
+        c: "1932",
+        d: "1934",
+        correct: "b",
+      },
+    ];
+
+    const quiz = document.getElementById("quiz");
+    const submitBtn = document.getElementById("submit");
+    const resultDiv = document.getElementById("result");
+
+    let currentQuestion = 0;
+    let score = 0;
+
+    function loadQuiz() {
+      const currentQuizData = quizData[currentQuestion];
+      quiz.innerHTML = `
+        <div class="question">${currentQuizData.question}</div>
+        <ul class="options">
+          <li>
+            <input type="radio" id="a" name="answer" value="a">
+            <label for="a">${currentQuizData.a}</label>
+          </li>
+          <li>
+            <input type="radio" id="b" name="answer" value="b">
+            <label for="b">${currentQuizData.b}</label>
+          </li>
+          <li>
+            <input type="radio" id="c" name="answer" value="c">
+            <label for="c">${currentQuizData.c}</label>
+          </li>
+          <li>
+            <input type="radio" id="d" name="answer" value="d">
+            <label for="d">${currentQuizData.d}</label>
+          </li>
+        </ul>
+      `;
+    }
+
+    function getSelectedAnswer() {
+      const answers = document.querySelectorAll('input[name="answer"]');
+      let selectedAnswer;
+      answers.forEach((answer) => {
+        if (answer.checked) {
+          selectedAnswer = answer.value;
+        }
+      });
+      return selectedAnswer;
+    }
+
+    submitBtn.addEventListener("click", () => {
+      const answer = getSelectedAnswer();
+      if (answer) {
+        if (answer === quizData[currentQuestion].correct) {
+          score++;
+        }
+        currentQuestion++;
+        if (currentQuestion < quizData.length) {
+          loadQuiz();
+        } else {
+          quiz.innerHTML = "";
+          resultDiv.innerHTML = `<h2>You scored ${score} out of ${quizData.length}!</h2>`;
+          submitBtn.textContent = "Restart";
+          submitBtn.addEventListener("click", () => location.reload());
+        }
+      } else {
+        alert("Please select an answer!");
+      }
+    });
+
+    // Load the first question
+    loadQuiz();
+  </script>
+</body>
+</html>
